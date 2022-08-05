@@ -32,21 +32,18 @@ const Map = () => {
 	}, []);
 
 	return (
-		<>
-			<h1>Meu Google Maps</h1>
-			<LoadScript googleMapsApiKey="AIzaSyD2iS81B0LZxtutno8CKTHupKxz-zkoDO8">
-				<GoogleMap
-					mapContainerStyle={S.mapContainerStyle}
-					zoom={15}
-					center={location}
-				>
-					<MarkerF
-						position={location}
-						icon={'https://i.ibb.co/h14P0xJ/paw-marker.png'}
-					/>
-				</GoogleMap>
-			</LoadScript>
-		</>
+		<LoadScript googleMapsApiKey={import.meta.env.VITE_GOOGLE_MAP_KEY}>
+			<GoogleMap
+				mapContainerStyle={S.mapContainerStyle}
+				zoom={15}
+				center={location}
+			>
+				<MarkerF
+					position={location}
+					icon={'https://i.ibb.co/h14P0xJ/paw-marker.png'}
+				/>
+			</GoogleMap>
+		</LoadScript>
 	);
 };
 
