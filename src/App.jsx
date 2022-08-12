@@ -1,13 +1,14 @@
 import React from 'react';
-import Map from './components/GoogleMap';
 import GlobalStyle from './assets/styles';
+import Router from './routes';
+import AppProvider from './providers';
 
 function App() {
 	return (
-		<>
+		<AppProvider>
 			<GlobalStyle />
-			<Map />
-		</>
+			<Router />
+		</AppProvider>
 	);
 }
 

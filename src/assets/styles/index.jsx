@@ -12,7 +12,8 @@ const GlobalStyle = createGlobalStyle`
     html, body, #root {
         font-family: var(--fonte-primaria);
         height: 100%;
-        width: 100%;  
+        width: 100%;
+        background-color: var(--cor-primaria);  
     }
     :root {
             --fonte-primaria: 'Montserrat', sans-serif;
