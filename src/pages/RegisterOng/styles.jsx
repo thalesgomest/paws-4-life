@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 import device from '../../utils/devicesSizes';
 
-const SignInContainer = styled.div`
+const OngContainer = styled.div`
 	display: flex;
 	flex-direction: column;
 	align-items: center;
@@ -52,9 +52,9 @@ const Form = styled.form`
 			outline: none;
 		}
 		&::placeholder {
-			font-family: var(--fonte-secundaria);
+			font-family: var(--fonte-primaria);
 			font-weight: 400;
-			font-size: 30px;
+			font-size: 20px;
 			color: var(--cor-primaria);
 		}
 		@media ${device.desktop} {
@@ -99,6 +99,7 @@ const Form = styled.form`
 		border: none;
 		color: #ffffff;
 		font-family: var(--fonte-primaria);
+		font-style: normal;
 		font-weight: 600;
 		font-size: 30px;
 		margin-bottom: 20px;
@@ -121,4 +122,4 @@ const Form = styled.form`
 	}
 `;
 
-export { SignInContainer, Form };
+export { OngContainer, Form };

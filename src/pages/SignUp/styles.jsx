@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import device from '../../utils/devicesSizes';
 
 const SignUpContainer = styled.div`
 	display: flex;
@@ -36,7 +37,7 @@ const Form = styled.form`
 	position: relative;
 
 	input {
-		width: 420px;
+		min-width: 300px;
 		height: 57px;
 		background: var(--cor-terciaria);
 		border-radius: 5px;
@@ -55,6 +56,10 @@ const Form = styled.form`
 			font-weight: 400;
 			font-size: 30px;
 			color: var(--cor-primaria);
+		}
+		@media ${device.desktop} {
+			width: 420px;
+			height: 57px;
 		}
 	}
 
@@ -87,7 +92,7 @@ const Form = styled.form`
 	}
 
 	button {
-		width: 420px;
+		width: 331px;
 		height: 66px;
 		background: var(--cor-secundaria);
 		border-radius: 5px;
@@ -104,6 +109,10 @@ const Form = styled.form`
 		cursor: pointer;
 		&:focus {
 			outline: none;
+		}
+		@media ${device.desktop} {
+			width: 420px;
+			height: 66px;
 		}
 	}
 

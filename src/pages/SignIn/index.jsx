@@ -8,13 +8,13 @@ import Paws4LifeLogo from '../../assets/images/paws4life-logo.svg';
 import { Button } from '../../components/authComponents';
 
 export default function SignIn() {
-	const { SignIn, buttonDisabled, data, setData, dataLoading } =
+	const { signIn, signInData, setSignInData, dataLoading } =
 		useContext(AuthContext);
 	const navigate = useNavigate();
 
 	const handleSignIn = async (e) => {
 		e.preventDefault();
-		SignIn(() => navigate('/sign-in'));
+		signIn(() => navigate('/posts'));
 	};
 
 	return (
@@ -29,9 +29,12 @@ export default function SignIn() {
 						className={dataLoading ? 'input-disabled' : ''}
 						placeholder="E-mail"
 						required
-						value={data.email}
+						value={signInData.email}
 						onChange={(e) =>
-							setData({ ...data, email: e.target.value })
+							setSignInData({
+								...signInData,
+								email: e.target.value,
+							})
 						}
 					/>
 					<FiMail className="icon_input" />
@@ -43,19 +46,17 @@ export default function SignIn() {
 						className={dataLoading ? 'input-disabled' : ''}
 						placeholder="Password"
 						required
-						value={data.password}
+						value={signInData.password}
 						onChange={(e) => {
-							setData({
-								...data,
+							setSignInData({
+								...signInData,
 								password: e.target.value,
 							});
 						}}
 					/>
 					<MdOutlineLock className="icon_input" />
 				</div>
-				<Button isLoading={dataLoading} isDisabled={buttonDisabled}>
-					Sign In now
-				</Button>
+				<Button isLoading={dataLoading}>Sign In now</Button>
 			</S.Form>
 			<Link to="/sign-up">
 				<p>Don't have a account? Sign up now!</p>

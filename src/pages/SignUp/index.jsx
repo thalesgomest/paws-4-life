@@ -9,8 +9,14 @@ import Paws4LifeLogo from '../../assets/images/paws4life-logo.svg';
 import { Button } from '../../components/authComponents';
 
 export default function SignUp() {
-	const { signUp, buttonDisabled, borderIsRed, data, setData, dataLoading } =
-		useContext(AuthContext);
+	const {
+		signUp,
+		buttonDisabled,
+		borderIsRed,
+		signUpData,
+		setSignUpData,
+		dataLoading,
+	} = useContext(AuthContext);
 	const navigate = useNavigate();
 
 	const handleSignUp = async (e) => {
@@ -30,9 +36,12 @@ export default function SignUp() {
 						className={dataLoading ? 'input-disabled' : ''}
 						placeholder="Name"
 						required
-						value={data.name}
+						value={signUpData.name}
 						onChange={(e) =>
-							setData({ ...data, name: e.target.value })
+							setSignUpData({
+								...signUpData,
+								name: e.target.value,
+							})
 						}
 					/>
 					<BiUserCircle className="icon_input" />
@@ -44,9 +53,12 @@ export default function SignUp() {
 						className={dataLoading ? 'input-disabled' : ''}
 						placeholder="E-mail"
 						required
-						value={data.email}
+						value={signUpData.email}
 						onChange={(e) =>
-							setData({ ...data, email: e.target.value })
+							setSignUpData({
+								...signUpData,
+								email: e.target.value,
+							})
 						}
 					/>
 					<FiMail className="icon_input" />
@@ -58,10 +70,10 @@ export default function SignUp() {
 						className={dataLoading ? 'input-disabled' : ''}
 						placeholder="Password"
 						required
-						value={data.password}
+						value={signUpData.password}
 						onChange={(e) => {
-							setData({
-								...data,
+							setSignUpData({
+								...signUpData,
 								password: e.target.value,
 							});
 						}}
@@ -75,10 +87,10 @@ export default function SignUp() {
 						className={borderIsRed()}
 						placeholder="Confirm Password"
 						required
-						value={data.confirmPassword}
+						value={signUpData.confirmPassword}
 						onChange={(e) => {
-							setData({
-								...data,
+							setSignUpData({
+								...signUpData,
 								confirmPassword: e.target.value,
 							});
 						}}

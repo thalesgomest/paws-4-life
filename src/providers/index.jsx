@@ -1,6 +1,11 @@
 import React from 'react';
 import { AuthProvider } from './AuthProvider';
+import { OngProvider } from './OngProvider';
 
 export default function AppProvider({ children }) {
-	return <AuthProvider>{children}</AuthProvider>;
+	return (
+		<OngProvider>
+			<AuthProvider>{children}</AuthProvider>
+		</OngProvider>
+	);
 }

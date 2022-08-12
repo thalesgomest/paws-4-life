@@ -1,34 +1,44 @@
-/* eslint-disable no-undef */
 import { createContext, useState, useEffect } from 'react';
 import axios from 'axios';
-import { useNavigate } from 'react-router-dom';
 
 import setUserData from '../utils/setUserData';
 
 export const AuthContext = createContext();
 
 export const AuthProvider = ({ children }) => {
-	const [data, setData] = useState({
+	const [signUpData, setSignUpData] = useState({
 		name: '',
 		email: '',
 		password: '',
 		confirmPassword: '',
 	});
+	const [signInData, setSignInData] = useState({
+		email: '',
+		password: '',
+	});
 	const [dataLoading, setDataLoading] = useState(false);
 	const [buttonDisabled, setButtonDisabled] = useState(true);
-	const signIn = (email, password) => {
+
+	const signIn = (navigate) => {
+		setDataLoading(true);
 		axios
-			.post(`https://localhost:5000/signin`, {
-				email,
-				password,
+			.post(`http://localhost:5000/signin`, {
+				email: signInData.email,
+				password: signInData.password,
 			})
 			.then(({ data }) => {
+				setDataLoading(false);
 				setUserData(data);
+				navigate();
+			})
+			.catch((err) => {
+				setDataLoading(false);
+				console.log({
+					message:
+						'Sign In error! Check your credentials and try again',
+					err,
+				});
 			});
-	};
-
-	const logout = () => {
-		localStorage.removeItem('userData');
 	};
 
 	const signUp = (navigate) => {
@@ -38,10 +48,10 @@ export const AuthProvider = ({ children }) => {
 
 		axios
 			.post(URL, {
-				name: data.name,
-				email: data.email,
-				password: data.password,
-				confirmPassword: data.confirmPassword,
+				name: signUpData.name,
+				email: signUpData.email,
+				password: signUpData.password,
+				confirmPassword: signUpData.confirmPassword,
 			})
 			.then(() => {
 				setDataLoading(false);
@@ -60,8 +70,9 @@ export const AuthProvider = ({ children }) => {
 	};
 
 	const isButtonDisabled = () => {
-		const arePasswordsEqual = () => data.confirmPassword === data.password;
-		const isConfirmPasswordEmpty = () => data.confirmPassword === '';
+		const arePasswordsEqual = () =>
+			signUpData.confirmPassword === signUpData.password;
+		const isConfirmPasswordEmpty = () => signUpData.confirmPassword === '';
 		if (!isConfirmPasswordEmpty() && arePasswordsEqual()) {
 			setButtonDisabled(false);
 		} else {
@@ -69,7 +80,8 @@ export const AuthProvider = ({ children }) => {
 		}
 	};
 	const borderIsRed = () => {
-		const arePasswordsEqual = () => data.confirmPassword === data.password;
+		const arePasswordsEqual = () =>
+			signUpData.confirmPassword === signUpData.password;
 
 		if (arePasswordsEqual() && dataLoading) {
 			return 'input_disabled';
@@ -77,7 +89,7 @@ export const AuthProvider = ({ children }) => {
 		if (
 			!arePasswordsEqual() &&
 			!dataLoading &&
-			data.confirmPassword.length > 0
+			signUpData.confirmPassword.length > 0
 		) {
 			return 'error_password';
 		}
@@ -86,7 +98,15 @@ export const AuthProvider = ({ children }) => {
 		}
 		return '';
 	};
-	useEffect(isButtonDisabled, [data.password, data.confirmPassword]);
+
+	const logout = () => {
+		localStorage.removeItem('userData');
+	};
+
+	useEffect(isButtonDisabled, [
+		signUpData.password,
+		signUpData.confirmPassword,
+	]);
 
 	return (
 		<AuthContext.Provider
@@ -96,8 +116,10 @@ export const AuthProvider = ({ children }) => {
 				isButtonDisabled,
 				buttonDisabled,
 				borderIsRed,
-				data,
-				setData,
+				signUpData,
+				setSignUpData,
+				signInData,
+				setSignInData,
 				dataLoading,
 				logout,
 			}}
