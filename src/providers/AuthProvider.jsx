@@ -99,8 +99,9 @@ export const AuthProvider = ({ children }) => {
 		return '';
 	};
 
-	const logout = () => {
+	const logout = (navigate) => {
 		localStorage.removeItem('userData');
+		navigate();
 	};
 
 	useEffect(isButtonDisabled, [

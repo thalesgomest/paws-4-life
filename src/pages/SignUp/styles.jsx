@@ -52,9 +52,9 @@ const Form = styled.form`
 			outline: none;
 		}
 		&::placeholder {
-			font-family: var(--fonte-secundaria);
+			font-family: var(--fonte-primaria);
 			font-weight: 400;
-			font-size: 30px;
+			font-size: 20px;
 			color: var(--cor-primaria);
 		}
 		@media ${device.desktop} {
