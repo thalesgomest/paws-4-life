@@ -1,40 +1,53 @@
 import React from 'react';
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useCallback } from 'react';
 import { GoogleMap, LoadScript, MarkerF } from '@react-google-maps/api';
-import * as S from './styles';
 
-const Map = () => {
+const Map = ({ coords }) => {
 	const [location, setLocation] = useState({});
 
-	function success({ coords }) {
-		const { latitude, longitude } = coords;
+	useEffect(() => {
 		setLocation({
 			...location,
-			lat: latitude,
-			lng: longitude,
+			lat: coords.latitude,
+			lng: coords.longitude,
 		});
-	}
-
-	function error(err) {
-		console.warn(`ERROR(${err.code}): ${err.message}`);
-	}
-
-	useEffect(() => {
-		if ('geolocation' in navigator) {
-			navigator.geolocation.watchPosition(success, error, {
-				timeout: 30000,
-				enableHighAccuracy: true,
-				maximumAge: 30000,
-			});
-		} else {
-			console.log('Usuário não autorizou');
-		}
 	}, []);
 
+	class LoadScriptOnlyIfNeeded extends LoadScript {
+		componentDidMount() {
+			const cleaningUp = true;
+			const isBrowser = typeof document !== 'undefined';
+			const isAlreadyLoaded =
+				window.google &&
+				window.google.maps &&
+				document.querySelector('body.first-hit-completed');
+			if (!isAlreadyLoaded && isBrowser) {
+				// @ts-ignore
+				if (window.google && !cleaningUp) {
+					console.error('google api is already presented');
+					return;
+				}
+
+				this.isCleaningUp().then(this.injectScript);
+			}
+
+			if (isAlreadyLoaded) {
+				this.setState({ loaded: true });
+			}
+		}
+	}
+
 	return (
-		<LoadScript googleMapsApiKey={import.meta.env.VITE_GOOGLE_MAP_KEY}>
+		<LoadScriptOnlyIfNeeded
+			googleMapsApiKey={import.meta.env.VITE_GOOGLE_MAP_KEY}
+		>
 			<GoogleMap
-				mapContainerStyle={S.mapContainerStyle}
+				mapContainerStyle={{
+					height: '100%',
+					width: '100%',
+					border: `2px solid #8C5D42`,
+					borderRadius: '10px',
+				}}
 				zoom={15}
 				center={location}
 			>
@@ -43,7 +56,7 @@ const Map = () => {
 					icon={'https://i.ibb.co/h14P0xJ/paw-marker.png'}
 				/>
 			</GoogleMap>
-		</LoadScript>
+		</LoadScriptOnlyIfNeeded>
 	);
 };
 

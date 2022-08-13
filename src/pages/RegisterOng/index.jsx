@@ -6,7 +6,6 @@ import { IoEarthOutline } from 'react-icons/io5';
 import { BiHomeHeart } from 'react-icons/bi';
 import { BsTelephone } from 'react-icons/bs';
 import * as S from './styles';
-import { AuthContext } from '../../providers/AuthProvider';
 import { OngContext } from '../../providers/OngProvider';
 import Paws4LifeLogo from '../../assets/images/paws4life-logo.svg';
 import { Button } from '../../components/authComponents';

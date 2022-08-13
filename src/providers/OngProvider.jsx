@@ -1,5 +1,7 @@
-import { createContext, useState, useEffect } from 'react';
+import { createContext, useState } from 'react';
 import axios from 'axios';
+import authorizationHeader from '../utils/authorizationHeader';
+import getUserData from '../utils/getUserData';
 
 export const OngContext = createContext();
 
@@ -11,6 +13,7 @@ export const OngProvider = ({ children }) => {
 		return phone;
 	}
 
+	const [allOngs, setAllOngs] = useState([]);
 	const [ongData, setOngData] = useState({
 		name: '',
 		telephone: '',
@@ -18,6 +21,8 @@ export const OngProvider = ({ children }) => {
 		email: '',
 		site: '',
 	});
+
+	let authHeader = '';
 
 	const [dataLoading, setDataLoading] = useState(false);
 
@@ -50,6 +55,24 @@ export const OngProvider = ({ children }) => {
 			});
 	};
 
+	const getAllOngs = () => {
+		const URL = 'http://localhost:5000/ongs';
+		authHeader = authorizationHeader(getUserData()?.token);
+
+		axios
+			.get(URL, authHeader)
+			.then(({ data }) => {
+				setAllOngs(data);
+			})
+			.catch((err) => {
+				console.log({
+					message:
+						'Error getting all posts! Check your data and try again',
+					err,
+				});
+			});
+	};
+
 	return (
 		<OngContext.Provider
 			value={{
@@ -58,6 +81,8 @@ export const OngProvider = ({ children }) => {
 				setOngData,
 				dataLoading,
 				registerOng,
+				getAllOngs,
+				allOngs,
 			}}
 		>
 			{children}
