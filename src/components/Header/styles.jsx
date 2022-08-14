@@ -14,6 +14,18 @@ export const Header = styled.header`
 	margin: 0 auto;
 	z-index: 2;
 
+	.user-info {
+		display: flex;
+		align-items: center;
+
+		span {
+			font-size: 20px;
+			font-weight: bold;
+			font-family: var(--fonte-primaria);
+			color: var(--cor-primaria);
+		}
+	}
+
 	.icon {
 		color: var(--cor-primaria);
 		font-size: 50px;

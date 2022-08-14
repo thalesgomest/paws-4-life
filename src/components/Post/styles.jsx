@@ -22,6 +22,15 @@ export const PostDataUpside = styled.div`
 	span {
 		color: #000000;
 		font-weight: 400;
+		line-height: 1.5;
+	}
+
+	.icon {
+		color: var(--cor-primaria);
+		font-size: 40px;
+		cursor: pointer;
+		margin-top: 15px;
+		margin-right: 15px;
 	}
 `;
 

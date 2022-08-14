@@ -2,8 +2,11 @@ import React from 'react';
 import * as S from './styles';
 import Map from '../GoogleMap';
 import dayjs from 'dayjs';
+import { HiOutlineTrash } from 'react-icons/hi';
+import getUserData from '../../utils/getUserData';
 
 const Post = ({ data }) => {
+	const userData = getUserData();
 	return (
 		<>
 			<S.PostContainer>
@@ -13,7 +16,9 @@ const Post = ({ data }) => {
 						<p>
 							Type: <span>{data.type}</span>
 						</p>
-						<p>Name:</p>
+						<p>
+							Name: <span>{data.name}</span>
+						</p>
 						<p>
 							Date:{' '}
 							<span>
@@ -21,6 +26,11 @@ const Post = ({ data }) => {
 							</span>
 						</p>
 					</S.PostInformation>
+					{userData.userId === data.userId ? (
+						<HiOutlineTrash className="icon" />
+					) : (
+						<></>
+					)}
 				</S.PostDataUpside>
 				<S.PostDataDownSide>
 					<p>Description:</p>

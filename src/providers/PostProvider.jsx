@@ -13,6 +13,7 @@ export const PostProvider = ({ children }) => {
 		type: '',
 		description: '',
 		image: '',
+		name: '',
 		location: {
 			latitude: '',
 			longitude: '',
@@ -21,10 +22,15 @@ export const PostProvider = ({ children }) => {
 	let authHeader = '';
 
 	const createPost = (navigate) => {
+		console.log(postData);
 		setDataLoading(true);
 
 		const URL = 'http://localhost:5000/post';
 		authHeader = authorizationHeader(getUserData()?.token);
+
+		if (postData.image === '') {
+			postData.image = 'https://i.ibb.co/HnsV3wK/logo.png';
+		}
 
 		axios
 			.post(URL, postData, authHeader)
@@ -34,6 +40,7 @@ export const PostProvider = ({ children }) => {
 					type: '',
 					description: '',
 					image: '',
+					name: '',
 					location: {
 						latitude: '',
 						longitude: '',
@@ -75,10 +82,8 @@ export const PostProvider = ({ children }) => {
 	};
 
 	const isButtonDisabled = () => {
-		if (postData.type.length > 0) {
-			if (postData.description.length > 0 && postData.image.length > 0) {
-				setButtonDisabled(false);
-			}
+		if (postData.type !== '' && postData.description.length > 0) {
+			setButtonDisabled(false);
 		} else {
 			setButtonDisabled(true);
 		}
@@ -111,11 +116,7 @@ export const PostProvider = ({ children }) => {
 		}
 	}, [location]);
 
-	useEffect(isButtonDisabled, [
-		postData.type,
-		postData.description,
-		postData.image,
-	]);
+	useEffect(isButtonDisabled, [postData.type, postData.description]);
 
 	return (
 		<PostContext.Provider

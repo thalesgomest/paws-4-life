@@ -38,9 +38,9 @@ const CreatePostPage = () => {
 						}
 					>
 						<option value="">Chose your type post</option>
-						<option value="rescue">rescue</option>
-						<option value="lost">lost</option>
-						<option value="other">other</option>
+						<option value="Rescue">Rescue</option>
+						<option value="Lost">Lost</option>
+						<option value="Other">Other</option>
 					</select>
 					<div className="input_container">
 						<input
@@ -48,7 +48,6 @@ const CreatePostPage = () => {
 							disabled={dataLoading}
 							className={dataLoading ? 'input-disabled' : ''}
 							placeholder="Image URL"
-							required
 							value={postData.image}
 							onChange={(e) =>
 								setPostData({
@@ -64,14 +63,13 @@ const CreatePostPage = () => {
 							disabled={dataLoading}
 							className={dataLoading ? 'input-disabled' : ''}
 							placeholder="Name"
-							required
 							value={postData.name}
-							// onChange={(e) =>
-							// 	setPostData({
-							// 		...postData,
-							// 		name: e.target.value,
-							// 	})
-							// }
+							onChange={(e) =>
+								setPostData({
+									...postData,
+									name: e.target.value,
+								})
+							}
 						/>
 					</div>
 					<div className="input_container">
