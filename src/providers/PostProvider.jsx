@@ -66,7 +66,6 @@ export const PostProvider = ({ children }) => {
 		axios
 			.get(URL, authHeader)
 			.then(({ data }) => {
-				data = data.reverse();
 				setAllPosts(data);
 				setDataLoading(false);
 			})
