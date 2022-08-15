@@ -48,9 +48,7 @@ const CreatePostPage = () => {
 							disabled={dataLoading}
 							className={dataLoading ? 'input-disabled' : ''}
 							placeholder="Image URL"
-							value={() => {
-								return postData.image;
-							}}
+							value={postData.image}
 							onChange={(e) =>
 								setPostData({
 									...postData,

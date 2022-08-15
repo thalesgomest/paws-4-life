@@ -99,21 +99,13 @@ export const PostProvider = ({ children }) => {
 		});
 	}
 
-	function error(err) {
-		console.warn(`ERROR(${err.code}): ${err.message}`);
-	}
-
 	useEffect(() => {
 		if ('geolocation' in navigator) {
-			navigator.geolocation.watchPosition(success, error, {
-				timeout: 30000,
-				enableHighAccuracy: true,
-				maximumAge: 30000,
-			});
+			navigator.geolocation.getCurrentPosition(success);
 		} else {
 			console.log('Usuário não autorizou');
 		}
-	}, [location]);
+	}, []);
 
 	useEffect(isButtonDisabled, [postData.type, postData.description]);
 

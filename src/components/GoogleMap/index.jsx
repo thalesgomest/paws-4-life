@@ -13,18 +13,6 @@ const Map = ({ coords }) => {
 		});
 	}, []);
 
-	// class LoadScriptOnlyIfNeeded extends LoadScript {
-	// 	componentDidMount() {
-	// 		const isAlreadyLoaded = window.google && window.google.maps;
-	// 		if (!isAlreadyLoaded) {
-	// 			this.isCleaningUp().then(this.injectScript);
-	// 		}
-	// 		if (isAlreadyLoaded) {
-	// 			this.setState({ loaded: true });
-	// 		}
-	// 	}
-	// }
-
 	return (
 		<LoadScript googleMapsApiKey={import.meta.env.VITE_GOOGLE_MAP_KEY}>
 			<GoogleMap
