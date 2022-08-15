@@ -113,7 +113,7 @@ export const PostProvider = ({ children }) => {
 		} else {
 			console.log('Usuário não autorizou');
 		}
-	}, []);
+	}, [location]);
 
 	useEffect(isButtonDisabled, [postData.type, postData.description]);
 
