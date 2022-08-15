@@ -22,7 +22,6 @@ export const PostProvider = ({ children }) => {
 	let authHeader = '';
 
 	const createPost = (navigate) => {
-		console.log(postData);
 		setDataLoading(true);
 
 		const URL = `${import.meta.env.VITE_URL_DATABASE}/post`;
@@ -114,7 +113,7 @@ export const PostProvider = ({ children }) => {
 		} else {
 			console.log('Usuário não autorizou');
 		}
-	}, [location]);
+	}, []);
 
 	useEffect(isButtonDisabled, [postData.type, postData.description]);
 

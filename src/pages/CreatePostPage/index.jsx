@@ -69,7 +69,6 @@ const CreatePostPage = () => {
 									...postData,
 									name: e.target.value,
 								});
-								console.log(postData.name);
 							}}
 						/>
 					</div>
