@@ -1,8 +1,9 @@
+import React, { useEffect, useContext } from 'react';
 import Header from '../../components/Header';
 import Footer from '../../components/Footer';
 import Post from '../../components/Post';
 import isLogged from '../../utils/isLogged';
-import React, { useEffect, useContext } from 'react';
+
 import { useNavigate } from 'react-router-dom';
 import { PostContext } from '../../providers/PostProvider';
 import * as S from './styles';

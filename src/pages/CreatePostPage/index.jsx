@@ -3,7 +3,7 @@ import Footer from '../../components/Footer';
 import { Button } from '../../components/authComponents';
 
 import isLogged from '../../utils/isLogged';
-import React, { useEffect, useContext } from 'react';
+import { useEffect, useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { PostContext } from '../../providers/PostProvider';
 import * as S from './styles';
@@ -64,12 +64,13 @@ const CreatePostPage = () => {
 							className={dataLoading ? 'input-disabled' : ''}
 							placeholder="Name"
 							value={postData.name}
-							onChange={(e) =>
+							onChange={(e) => {
 								setPostData({
 									...postData,
 									name: e.target.value,
-								})
-							}
+								});
+								console.log(postData.name);
+							}}
 						/>
 					</div>
 					<div className="input_container">
