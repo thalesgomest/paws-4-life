@@ -21,7 +21,7 @@ const PostsPage = () => {
 		<>
 			<Header />
 			<S.PostContainer>
-				{allPosts.reverse().map((post) => (
+				{allPosts.map((post) => (
 					<Post key={post.id} data={post} />
 				))}
 			</S.PostContainer>
