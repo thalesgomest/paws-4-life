@@ -29,7 +29,7 @@ export const OngProvider = ({ children }) => {
 	const registerOng = (navigate) => {
 		setDataLoading(true);
 
-		const URL = 'http://localhost:5000/register/ong';
+		const URL = `${import.meta.env.VITE_URL_DATABASE}/register/ong`;
 
 		axios
 			.post(URL, {
@@ -56,7 +56,7 @@ export const OngProvider = ({ children }) => {
 	};
 
 	const getAllOngs = () => {
-		const URL = 'http://localhost:5000/ongs';
+		const URL = `${import.meta.env.VITE_URL_DATABASE}/ongs`;
 		authHeader = authorizationHeader(getUserData()?.token);
 
 		axios

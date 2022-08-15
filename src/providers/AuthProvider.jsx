@@ -22,7 +22,7 @@ export const AuthProvider = ({ children }) => {
 	const signIn = (navigate) => {
 		setDataLoading(true);
 		axios
-			.post(`http://localhost:5000/signin`, {
+			.post(`${import.meta.env.VITE_URL_DATABASE}/signin`, {
 				email: signInData.email,
 				password: signInData.password,
 			})
@@ -44,7 +44,7 @@ export const AuthProvider = ({ children }) => {
 	const signUp = (navigate) => {
 		setDataLoading(true);
 
-		const URL = 'http://localhost:5000/signup';
+		const URL = `${import.meta.env.VITE_URL_DATABASE}/signup`;
 
 		axios
 			.post(URL, {

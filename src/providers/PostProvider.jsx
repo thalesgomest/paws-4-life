@@ -25,7 +25,7 @@ export const PostProvider = ({ children }) => {
 		console.log(postData);
 		setDataLoading(true);
 
-		const URL = 'http://localhost:5000/post';
+		const URL = `${import.meta.env.VITE_URL_DATABASE}/post`;
 		authHeader = authorizationHeader(getUserData()?.token);
 
 		if (postData.image === '') {
@@ -61,7 +61,7 @@ export const PostProvider = ({ children }) => {
 	};
 
 	const getAllPosts = () => {
-		const URL = 'http://localhost:5000/post';
+		const URL = `${import.meta.env.VITE_URL_DATABASE}/post`;
 		authHeader = authorizationHeader(getUserData()?.token);
 		setDataLoading(true);
 		axios
