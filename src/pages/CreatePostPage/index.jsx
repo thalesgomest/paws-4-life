@@ -16,6 +16,11 @@ const CreatePostPage = () => {
 		e.preventDefault();
 		createPost(() => navigate('/posts'));
 	};
+	useEffect(() => {
+		if (!isLogged()) {
+			navigate('/sign-in');
+		}
+	}, []);
 
 	return (
 		<>
