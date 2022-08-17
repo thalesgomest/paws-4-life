@@ -92,7 +92,7 @@ const Form = styled.form`
 	}
 
 	button {
-		min-width: 300px;
+		min-width: 330px;
 		height: 66px;
 		background: var(--cor-secundaria);
 		border-radius: 5px;
